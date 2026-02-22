@@ -17,7 +17,7 @@ router = APIRouter(
     tags = ["Authentication"],
 )
 
-templates = Jinja2Templates(directory = "app/templates")
+templates = Jinja2Templates(directory = "templates")
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
