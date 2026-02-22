@@ -5,8 +5,8 @@ from typing import Annotated
 from sqlalchemy.orm import Session
 from starlette import status
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
-from ..database import SessionLocal
-from ..models import User
+from database import SessionLocal
+from models import User
 from passlib.context import CryptContext
 from jose import jwt, JWTError
 from fastapi.templating import Jinja2Templates
