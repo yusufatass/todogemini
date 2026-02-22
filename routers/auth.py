@@ -10,7 +10,7 @@ from ..models import User
 from passlib.context import CryptContext
 from jose import jwt, JWTError
 from fastapi.templating import Jinja2Templates
-
+import os
 
 router = APIRouter(
     prefix = "/auth",
@@ -19,7 +19,7 @@ router = APIRouter(
 
 templates = Jinja2Templates(directory = "app/templates")
 
-SECRET_KEY = "nvhXr7gNXO1ussP3No8ojH5lqSKXsdW3"
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 
 def create_access_token(username: str, user_id: int, role: str, expires_delta: timedelta):
