@@ -41,3 +41,52 @@ Uygulama temel olarak iki ana router üzerinden çalışmaktadır:
 * `GET /todo/todo/{todo_id}` - Belirli bir görevi getirir.
 * `PUT /todo/todo/{todo_id}` - Görevi günceller.
 * `DELETE /todo/todo/{todo_id}` - Görevi siler.
+
+## 💻 Kurulum ve Lokalde Çalıştırma
+
+Projeyi kendi bilgisayarınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
+
+1. **Repoyu Klonlayın:**
+   ```bash
+   git clone [https://github.com/kullanici_adiniz/ToDoGemini.git](https://github.com/kullanici_adiniz/ToDoGemini.git)
+   cd ToDoGemini
+   ```
+
+2. **Sanal Ortam (Virtual Environment) Oluşturun ve Aktif Edin:**
+   ```bash
+   python -m venv .venv
+   # Windows için:
+   .venv\Scripts\activate
+   # Linux/Mac için:
+   source .venv/bin/activate
+   ```
+
+3. **Gerekli Paketleri Yükleyin:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Çevresel Değişkenleri Ayarlayın:**
+   Ana dizinde bir `.env` dosyası oluşturun ve aşağıdaki değişkenleri kendi bilgilerinize göre doldurun:
+   ```env
+   SECRET_KEY=kendi_gizli_anahtariniz
+   ALGORITHM=HS256
+   GOOGLE_API_KEY=google_ai_studio_api_anahtariniz
+   ```
+
+5. **Veritabanı Migration'larını Çalıştırın:**
+   ```bash
+   alembic upgrade head
+   ```
+
+6. **Uygulamayı Başlatın:**
+   ```bash
+   uvicorn main:app --reload
+   ```
+   Tarayıcınızda `http://127.0.0.1:8000/auth/login-page` adresine giderek projeyi görüntüleyebilirsiniz.
+
+## 👨‍💻 Geliştirici
+**Yusuf Ataş**
+
+---
+*Bu proje FastAPI ve LangChain öğrenme/geliştirme süreçlerinin bir parçası olarak tasarlanmıştır.*
