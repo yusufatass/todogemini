@@ -24,6 +24,9 @@ ToDoGemini, kullanıcıların günlük görevlerini yönetebildiği ve Google Ge
 
 ## 📋 API Uç Noktaları (Endpoints)
 
+<img width="1186" height="726" alt="image" src="https://github.com/user-attachments/assets/e1af88db-e01d-4d59-9a4c-5c647cead81b" />
+
+
 Uygulama temel olarak iki ana router üzerinden çalışmaktadır:
 
 **Authentication (`/auth`)**
