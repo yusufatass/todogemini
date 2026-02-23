@@ -1,4 +1,6 @@
 from datetime import timedelta, datetime, timezone
+
+from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel
 from typing import Annotated
@@ -18,6 +20,8 @@ router = APIRouter(
 )
 
 templates = Jinja2Templates(directory = "templates")
+
+load_dotenv()
 
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"

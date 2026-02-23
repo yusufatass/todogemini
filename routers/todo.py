@@ -11,7 +11,7 @@ from fastapi.templating import Jinja2Templates
 import google.generativeai as genai
 import os
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 import markdown
 from bs4 import BeautifulSoup
 
@@ -20,6 +20,8 @@ router = APIRouter(
     prefix = "/todo",
     tags = ["Todo"],
 )
+
+load_dotenv()
 
 templates = Jinja2Templates(directory = "templates")
 
@@ -149,16 +151,25 @@ def markdown_to_text(markdown_string):
     return text
 
 
-
-
 def create_todo_with_gemini(todo_string: str):
     load_dotenv()
     genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-    llm = ChatGoogleGenerativeAI(model = "gemini-2.5-flash")
+
+    llm = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+
     response = llm.invoke(
         [
-            HumanMessage(content = "I will provide you a todo item to add my to do list. What i want you to do is to create a longer and more comprehensive description of that todo item, my next message will be my todo:"),
-            HumanMessage(content = todo_string),
+            # SystemMessage modelin rolünü ve kurallarını belirler
+            SystemMessage(content=(
+                "You are a helpful productivity assistant. "
+                "The user will provide a short to-do item. "
+                "Your task is to create a longer, more comprehensive and actionable description for that to-do item. "
+                "IMPORTANT: Respond ONLY with the description. Do not use conversational filler like 'Okay' or 'Here is your description'. "
+                "Respond in the same language as the user's to-do item."
+            )),
+            # HumanMessage kullanıcının asıl girdisidir
+            HumanMessage(content=todo_string)
         ]
     )
+
     return markdown_to_text(response.content)
